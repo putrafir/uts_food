@@ -65,7 +65,7 @@
 
 
                     <div class="card-body p-4">
-                        <form action="{{ route('admin.profile.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.password.update') }}" method="put" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">
@@ -74,8 +74,7 @@
                                         <div class="mb-3">
                                             <label for="example-text-input" class="form-label">Old Password</label>
                                             <input class="form-control @error('old_password') is-invalid @enderror "
-                                                type="password" name="old_password" value="{{ $profileData->name }}"
-                                                id="old_password">
+                                                type="password" name="old_password" id="old_password">
                                             @error('old_password')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -84,8 +83,7 @@
                                         <div class="mb-3">
                                             <label for="example-text-input" class="form-label">New Password</label>
                                             <input class="form-control @error('new_password') is-invalid @enderror "
-                                                type="password" name="new_password" value="{{ $profileData->name }}"
-                                                id="old_password">
+                                                type="password" name="new_password" id="old_password">
                                             @error('new_password')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -94,7 +92,7 @@
                                         <div class="mb-3">
                                             <label for="example-text-input" class="form-label">Confirm New Password</label>
                                             <input class="form-control" type="password" name="new_password_confirmation"
-                                                value="{{ $profileData->name }}" id="new_password_confirmation">
+                                                id="new_password_confirmation">
 
                                         </div>
                                         <button type="submit" class="btn btn-primary waves-effect waves-light">Save

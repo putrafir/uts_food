@@ -7,6 +7,7 @@ use App\Mail\Websitemail;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
@@ -101,6 +102,7 @@ class AdminController extends Controller
         $data->phone = $request->phone;
         $data->address = $request->address;
         $oldPhotoPath = $data->photo;
+        $fileName = $oldPhotoPath;
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
@@ -134,5 +136,33 @@ class AdminController extends Controller
         $id = Auth::guard('admin')->id();
         $profileData = Admin::find($id);
         return view('admin.admin_change_password', compact('profileData'));
+    }
+
+    public function AdminPasswordUpdate(Request $request)
+    {
+        $admin = Auth::guard('admin')->user();
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+
+        if (!Hash::check($request->old_password, $admin->password)) {
+            $notification = array(
+                'message' => 'Old Password Does not Match!',
+                'alert-type' => 'error'
+            );
+
+            return back()->with($notification);
+        }
+        Admin::whereId($admin->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        $notification = array(
+            'message' => 'Password Change Successfully',
+            'alert-type' => 'success'
+        );
+
+        return back()->with($notification);
     }
 }
