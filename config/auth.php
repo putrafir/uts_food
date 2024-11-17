@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admin;
 use App\Models\Client;
 
 return [
@@ -76,7 +77,7 @@ return [
         ],
         'admins' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\Admin::class),
+            'model' => env('AUTH_MODEL', Admin::class),
         ],
         'clients' => [
             'driver' => 'eloquent',
