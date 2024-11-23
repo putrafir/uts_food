@@ -69,15 +69,15 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li>
-                                {{-- <a href="{{ route('all.gallery') }}">
+                                <a href="{{ route('all.gallery') }}">
                                     <span data-key="t-calendar">All Gallery</span>
-                                </a> --}}
+                                </a>
                             </li>
 
                             <li>
-                                {{-- <a href="{{ route('add.gallery') }}">
+                                <a href="{{ route('add.product') }}">
                                     <span data-key="t-chat">Add Gallery</span>
-                                </a> --}}
+                                </a>
                             </li>
 
                         </ul>
