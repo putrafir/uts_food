@@ -93,9 +93,11 @@
                                             <label for="example-text-input" class="form-label">City</label>
                                             <select name="city_id" class="form-select">
                                                 <option>Select</option>
-                                                {{-- @foreach ($city as $cit)
-            <option value="{{ $cit->id }}" {{ $cit->id == $profileData->city_id ? 'selected' : '' }} >{{ $cit->city_name }}</option>
-            @endforeach  --}}
+                                                @foreach ($city as $cit)
+                                                    <option value="{{ $cit->id }}"
+                                                        {{ $cit->id == $profileData->city_id ? 'selected' : '' }}>
+                                                        {{ $cit->city_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
 

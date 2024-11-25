@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Models\City;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,10 +85,11 @@ class ClientController extends Controller
 
     public function ClientProfile()
     {
+        $city = City::latest()->get();
         $id = Auth::guard('client')->id();
         $profileData = Client::find($id);
 
-        return view('client.client_profile', compact('profileData'));
+        return view('client.client_profile', compact('profileData', 'city'));
     }
 
 
@@ -100,18 +102,26 @@ class ClientController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address = $request->address;
+        $data->city_id = $request->city_id;
+        $data->shop_info = $request->shop_info;
         $oldPhotoPath = $data->photo;
-        $fileName = $oldPhotoPath;
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('upload/client_images'), $fileName);
             $data->photo = $fileName;
+
+            if ($oldPhotoPath && $oldPhotoPath !== $fileName) {
+                $this->deleteOldImage($oldPhotoPath);
+            }
         }
 
-        if ($oldPhotoPath && $oldPhotoPath !== $fileName) {
-            $this->deleteOldImage($oldPhotoPath);
+        if ($request->hasFile('cover_photo')) {
+            $file1 = $request->file('cover_photo');
+            $filename1 = time() . '.' . $file1->getClientOriginalExtension();
+            $file1->move(public_path('upload/client_images'), $filename1);
+            $data->cover_photo = $filename1;
         }
 
         $data->save();
