@@ -91,9 +91,9 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li>
-                                {{-- <a href="{{ route('all.coupon') }}">
+                                <a href="{{ route('all.coupon') }}">
                                     <span data-key="t-calendar">All Coupon</span>
-                                </a> --}}
+                                </a>
                             </li>
 
                             <li>

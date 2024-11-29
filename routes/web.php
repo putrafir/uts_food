@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Client\RestaurantController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CuponController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -125,6 +126,15 @@ Route::middleware('client')->group(function () {
         Route::post('/update/gallery', 'UpdateGallery')->name('gallery.update');
         Route::get('/delete/gallery/{id}', 'DeleteGallery')->name('delete.gallery');
         Route::get('/changeStatus', 'ChangeStatus');
+    });
+
+    Route::controller(CuponController::class)->group(function () {
+        Route::get('/all/coupon', 'AllCoupon')->name('all.coupon');
+        Route::get('/add/gallery', 'AddGallery')->name('add.gallery');
+        Route::post('/store/gallery', 'StoreGallery')->name('gallery.store');
+        Route::get('/edit/gallery/{id}', 'EditGallery')->name('edit.gallery');
+        Route::post('/update/gallery', 'UpdateGallery')->name('gallery.update');
+        Route::get('/delete/gallery/{id}', 'DeleteGallery')->name('delete.gallery');
     });
 });
 // Route::middleware('client')->group(function () {
