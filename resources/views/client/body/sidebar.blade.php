@@ -97,9 +97,9 @@
                             </li>
 
                             <li>
-                                {{-- <a href="{{ route('add.coupon') }}">
+                                <a href="{{ route('add.coupon') }}">
                                     <span data-key="t-chat">Add Coupon</span>
-                                </a> --}}
+                                </a>
                             </li>
 
                         </ul>
