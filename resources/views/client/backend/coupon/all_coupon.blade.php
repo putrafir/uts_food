@@ -57,12 +57,12 @@
                                                 @endif
                                             </td>
 
-                                            {{-- <td><a href="{{ route('edit.coupon', $item->id) }}"
+                                            <td><a href="{{ route('edit.coupon', $item->id) }}"
                                                     class="btn btn-info waves-effect waves-light">Edit</a>
                                                 <a href="{{ route('delete.coupon', $item->id) }}"
                                                     class="btn btn-danger waves-effect waves-light"
                                                     id="delete">Delete</a>
-                                            </td> --}}
+                                            </td>
                                         </tr>
                                     @endforeach
 
