@@ -13,7 +13,8 @@ class CuponController extends Controller
 {
     public function AllCoupon()
     {
-        $coupon = Cupon::latest()->get();
+        $cid = Auth::guard('client')->id();
+        $coupon = Cupon::where('client_id', $cid)->latest()->get();
         return view('client.backend.coupon.all_coupon', compact('coupon'));
     }
 
@@ -45,6 +46,7 @@ class CuponController extends Controller
 
     public function EditCoupon($id)
     {
+
         $coupon = Cupon::find($id);
         return view('client.backend.coupon.edit_coupon', compact('coupon'));
     }
