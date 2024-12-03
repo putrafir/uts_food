@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Client\RestaurantController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CuponController;
+use App\Http\Controllers\ManageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -92,6 +93,17 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/edit/city/{id}', 'EditCity');
         Route::post('/update/city', 'UpdateCity')->name('city.update');
         Route::get('/delete/city/{id}', 'DeleteCity')->name('delete.city');
+    });
+
+
+    Route::controller(ManageController::class)->group(function () {
+        Route::get('/admin/all/product', 'AdminAllProduct')->name('admin.all.product');
+        Route::get('/add/product', 'AddProduct')->name('add.product');
+        Route::post('/store/product', 'StoreProduct')->name('product.store');
+        Route::get('/edit/product/{id}', 'EditProduct')->name('edit.product');
+        Route::post('/update/product', 'UpdateProduct')->name('product.update');
+        Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
+        Route::get('/changeStatus', 'ChangeStatus');
     });
 }); // End 
 
