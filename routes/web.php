@@ -98,12 +98,11 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::controller(ManageController::class)->group(function () {
         Route::get('/admin/all/product', 'AdminAllProduct')->name('admin.all.product');
-        Route::get('/add/product', 'AddProduct')->name('add.product');
-        Route::post('/store/product', 'StoreProduct')->name('product.store');
-        Route::get('/edit/product/{id}', 'EditProduct')->name('edit.product');
-        Route::post('/update/product', 'UpdateProduct')->name('product.update');
-        Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
-        Route::get('/changeStatus', 'ChangeStatus');
+        Route::get('/admin/add/product', 'AdminAddProduct')->name('admin.add.product');
+        Route::post('/admin/store/product', 'AdminStoreProduct')->name('admin.product.store');
+        Route::get('/admin/edit/product/{id}', 'AdminEditProduct')->name('admin.edit.product');
+        Route::post('/admin/update/product', 'AdminUpdateProduct')->name('admin.product.update');
+        Route::get('/admin/delete/product/{id}', 'AdminDeleteProduct')->name('admin.delete.product');
     });
 }); // End 
 
@@ -128,7 +127,6 @@ Route::middleware('client')->group(function () {
         Route::get('/edit/product/{id}', 'EditProduct')->name('edit.product');
         Route::post('/update/product', 'UpdateProduct')->name('product.update');
         Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
-        Route::get('/changeStatus', 'ChangeStatus');
     });
     Route::controller(RestaurantController::class)->group(function () {
         Route::get('/all/gallery', 'AllGallery')->name('all.gallery');
@@ -149,6 +147,10 @@ Route::middleware('client')->group(function () {
         Route::get('/delete/coupon/{id}', 'DeleteCoupon')->name('delete.coupon');
     });
 });
+
+
+Route::get('/changeStatus', [RestaurantController::class, 'ChangeStatus']);
+
 // Route::middleware('client')->group(function () {
 //     Route::get('/client/dashboard', [ClientController::class, 'ClientDashboard'])->name('client.dashboard');
 //     Route::get('/client/profile', [ClientController::class, 'ClientProfile'])->name('client.profile');
