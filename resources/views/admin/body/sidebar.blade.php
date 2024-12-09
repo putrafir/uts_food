@@ -78,20 +78,20 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="users"></i>
-                        <span data-key="t-authentication">Authentication</span>
+                        <i data-feather="grid"></i>
+                        <span data-key="t-apps">Manage Restaurant</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="auth-login.html" data-key="t-login">Login</a></li>
-                        <li><a href="auth-register.html" data-key="t-register">Register</a></li>
-                        <li><a href="auth-recoverpw.html" data-key="t-recover-password">Recover Password</a></li>
-                        <li><a href="auth-lock-screen.html" data-key="t-lock-screen">Lock Screen</a></li>
-                        <li><a href="auth-logout.html" data-key="t-logout">Log Out</a></li>
-                        <li><a href="auth-confirm-mail.html" data-key="t-confirm-mail">Confirm Mail</a></li>
-                        <li><a href="auth-email-verification.html" data-key="t-email-verification">Email
-                                Verification</a></li>
-                        <li><a href="auth-two-step-verification.html" data-key="t-two-step-verification">Two Step
-                                Verification</a></li>
+                        <li>
+                            <a href="{{ route('pending.restaurant') }}">
+                                <span data-key="t-calendar">Pending Restaurant </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('approve.restaurant') }}">
+                                <span data-key="t-chat">Approve Restaurant</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
