@@ -1,7 +1,11 @@
 @php
+    // dd(Auth::user());
+
     $id = Auth::user()->id;
     $profileData = App\Models\User::find($id);
 @endphp
+
+
 <div class="col-md-3">
     <div class="osahan-account-page-left shadow-sm rounded bg-white h-100">
         <div class="border-bottom p-4">

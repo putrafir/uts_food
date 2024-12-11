@@ -15,27 +15,30 @@
                     </a>
                 </li>
 
+                {{-- @if (Auth::guard('admin')->user()->can('category.menu')) --}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i data-feather="grid"></i>
                         <span data-key="t-apps">Category</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                        {{-- @if (Auth::guard('admin')->user()->can('category.all')) --}}
                         <li>
                             <a href="{{ route('all.category') }}">
                                 <span data-key="t-calendar">All Category</span>
                             </a>
                         </li>
-
+                        {{-- @endif
+                @if (Auth::guard('admin')->user()->can('category.add')) --}}
                         <li>
                             <a href="{{ route('add.category') }}">
                                 <span data-key="t-chat">Add Category</span>
                             </a>
                         </li>
-
-
+                        {{-- @endif --}}
                     </ul>
                 </li>
+                {{-- @endif --}}
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
@@ -49,12 +52,8 @@
                             </a>
                         </li>
 
-
-
-
                     </ul>
                 </li>
-
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
@@ -67,6 +66,7 @@
                                 <span data-key="t-calendar">All Product</span>
                             </a>
                         </li>
+
                         <li>
                             <a href="{{ route('admin.add.product') }}">
                                 <span data-key="t-chat">Add Product</span>
@@ -75,6 +75,7 @@
 
                     </ul>
                 </li>
+
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
@@ -87,11 +88,13 @@
                                 <span data-key="t-calendar">Pending Restaurant </span>
                             </a>
                         </li>
+
                         <li>
                             <a href="{{ route('approve.restaurant') }}">
                                 <span data-key="t-chat">Approve Restaurant</span>
                             </a>
                         </li>
+
                     </ul>
                 </li>
 
@@ -110,90 +113,104 @@
                     </ul>
                 </li>
 
-
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="file-text"></i>
-                        <span data-key="t-pages">Pages</span>
+                        <i data-feather="grid"></i>
+                        <span data-key="t-apps">Manage Orders</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="pages-starter.html" data-key="t-starter-page">Starter Page</a></li>
-                        <li><a href="pages-maintenance.html" data-key="t-maintenance">Maintenance</a></li>
-                        <li><a href="pages-comingsoon.html" data-key="t-coming-soon">Coming Soon</a></li>
-                        <li><a href="pages-timeline.html" data-key="t-timeline">Timeline</a></li>
-                        <li><a href="pages-faqs.html" data-key="t-faqs">FAQs</a></li>
-                        <li><a href="pages-pricing.html" data-key="t-pricing">Pricing</a></li>
-                        <li><a href="pages-404.html" data-key="t-error-404">Error 404</a></li>
-                        <li><a href="pages-500.html" data-key="t-error-500">Error 500</a></li>
+                        <li>
+                            <a href="{{ route('pending.order') }}">
+                                <span data-key="t-calendar">Pending Orders </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('confirm.order') }}">
+                                <span data-key="t-calendar">Confirm Orders </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('processing.order') }}">
+                                <span data-key="t-calendar">Processing Orders </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('deliverd.order') }}">
+                                <span data-key="t-calendar">Deliverd Orders </span>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 
-                <li>
-                    <a href="layouts-horizontal.html">
-                        <i data-feather="layout"></i>
-                        <span data-key="t-horizontal">Horizontal</span>
-                    </a>
-                </li>
 
                 <li class="menu-title mt-2" data-key="t-components">Elements</li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i data-feather="briefcase"></i>
-                        <span data-key="t-components">Components</span>
+                        <span data-key="t-components">Manage Reports</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ui-alerts.html" data-key="t-alerts">Alerts</a></li>
-                        <li><a href="ui-buttons.html" data-key="t-buttons">Buttons</a></li>
-                        <li><a href="ui-cards.html" data-key="t-cards">Cards</a></li>
-                        <li><a href="ui-carousel.html" data-key="t-carousel">Carousel</a></li>
-                        <li><a href="ui-dropdowns.html" data-key="t-dropdowns">Dropdowns</a></li>
-                        <li><a href="ui-grid.html" data-key="t-grid">Grid</a></li>
-                        <li><a href="ui-images.html" data-key="t-images">Images</a></li>
-                        <li><a href="ui-modals.html" data-key="t-modals">Modals</a></li>
-                        <li><a href="ui-offcanvas.html" data-key="t-offcanvas">Offcanvas</a></li>
-                        <li><a href="ui-progressbars.html" data-key="t-progress-bars">Progress Bars</a></li>
-                        <li><a href="ui-placeholders.html" data-key="t-progress-bars">Placeholders</a></li>
-                        <li><a href="ui-tabs-accordions.html" data-key="t-tabs-accordions">Tabs & Accordions</a></li>
-                        <li><a href="ui-typography.html" data-key="t-typography">Typography</a></li>
-                        <li><a href="ui-toasts.html" data-key="t-typography">Toasts</a></li>
-                        <li><a href="ui-video.html" data-key="t-video">Video</a></li>
-                        <li><a href="ui-general.html" data-key="t-general">General</a></li>
-                        <li><a href="ui-colors.html" data-key="t-colors">Colors</a></li>
-                        <li><a href="ui-utilities.html" data-key="t-colors">Utilities</a></li>
+                        <li><a href="{{ route('admin.all.reports') }}" data-key="t-alerts">All Reports</a></li>
+
+
                     </ul>
                 </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i data-feather="gift"></i>
-                        <span data-key="t-ui-elements">Extended</span>
+                        <span data-key="t-ui-elements">Manage Review</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="extended-lightbox.html" data-key="t-lightbox">Lightbox</a></li>
-                        <li><a href="extended-rangeslider.html" data-key="t-range-slider">Range Slider</a></li>
-                        <li><a href="extended-sweet-alert.html" data-key="t-sweet-alert">SweetAlert 2</a></li>
-                        <li><a href="extended-session-timeout.html" data-key="t-session-timeout">Session Timeout</a>
+                        <li><a href="{{ route('admin.pending.review') }}" data-key="t-lightbox">Pending Review</a></li>
+                        <li><a href="{{ route('admin.approve.review') }}" data-key="t-range-slider">Approve Review</a>
                         </li>
-                        <li><a href="extended-rating.html" data-key="t-rating">Rating</a></li>
-                        <li><a href="extended-notifications.html" data-key="t-notifications">Notifications</a></li>
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="gift"></i>
+                        <span data-key="t-ui-elements">Role & Permission</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{-- <li><a href="{{ route('all.permission') }}" data-key="t-lightbox">All Permission</a></li> --}}
+                        {{-- <li><a href="{{ route('all.roles') }}" data-key="t-range-slider">All Roles</a></li> --}}
+                        {{-- <li><a href="{{ route('add.roles.permission') }}" data-key="t-range-slider">Role In Permission</a></li>
+                <li><a href="{{ route('all.roles.permission') }}" data-key="t-range-slider">All Role In Permission</a></li> --}}
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="gift"></i>
+                        <span data-key="t-ui-elements">Manage Admin</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        {{-- <li><a href="{{ route('all.admin') }}" data-key="t-lightbox">All Admin</a></li>
+                <li><a href="{{ route('add.admin') }}" data-key="t-range-slider">Add Admin</a></li> --}}
+
+
                     </ul>
                 </li>
 
 
+            </ul>
 
+            <div class="card sidebar-alert border-0 text-center mx-4 mb-0 mt-5">
+                <div class="card-body">
+                    <img src="assets/images/giftbox.png" alt="">
+                    <div class="mt-4">
+                        <h5 class="alertcard-title font-size-16">Unlimited Access</h5>
+                        <p class="font-size-13">Upgrade your plan from a Free trial, to select ‘Business Plan’.</p>
 
-
-                <div class="card sidebar-alert border-0 text-center mx-4 mb-0 mt-5">
-                    <div class="card-body">
-                        <img src="assets/images/giftbox.png" alt="">
-                        <div class="mt-4">
-                            <h5 class="alertcard-title font-size-16">Unlimited Access</h5>
-                            <p class="font-size-13">Upgrade your plan from a Free trial, to select ‘Business Plan’.</p>
-                            <a href="#!" class="btn btn-primary mt-2">Upgrade Now</a>
-                        </div>
                     </div>
                 </div>
+            </div>
         </div>
         <!-- Sidebar -->
     </div>

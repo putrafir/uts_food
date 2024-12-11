@@ -57,4 +57,20 @@ class HomeController extends Controller
             return response()->json(['error' => 'First Login Your Account']);
         }
     }
+
+    public function AllWishlist()
+    {
+        $wishlist = Wishlist::where('user_id', Auth::id())->get();
+        return view('frontend.dashboard.all_wishlist', compact('wishlist'));
+    }
+
+    public function RemoveWishlist($id)
+    {
+        Wishlist::find($id)->delete();
+        $notification = array(
+            'message' => 'Wishlist Deleted Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
 }

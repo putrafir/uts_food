@@ -11,6 +11,8 @@ use App\Http\Controllers\ManageController;
 use App\Http\Controllers\ManageOrderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
     Route::get('/change/password', [UserController::class, 'ChangePassword'])->name('change.password');
     Route::post('/user/password/update', [UserController::class, 'UserPasswordUpdate'])->name('user.password.update');
+
+    Route::get('/all/wishlist', [HomeController::class, 'AllWishlist'])->name('all.wishlist');
+    Route::get('/remove/wishlist/{id}', [HomeController::class, 'RemoveWishlist'])->name('remove.wishlist');
+
+
+    Route::controller(ManageOrderController::class)->group(function () {
+        Route::get('/user/order/list', 'UserOrderList')->name('user.order.list');
+        Route::get('/user/order/details/{id}', 'UserOrderDetails')->name('user.order.details');
+        Route::get('/user/invoice/download/{id}', 'UserInvoiceDownload')->name('user.invoice.download');
+    });
 });
 
 require __DIR__ . '/auth.php';
@@ -41,16 +53,6 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
     Route::get('/admin/change/password', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
     Route::put('/admin/password/update', [AdminController::class, 'AdminPasswordUpdate'])->name('admin.password.update');
-
-    Route::get('/all/wishlist', [HomeController::class, 'AllWishlist'])->name('all.wishlist');
-    Route::get('/remove/wishlist/{id}', [HomeController::class, 'RemoveWishlist'])->name('remove.wishlist');
-
-
-    Route::controller(ManageOrderController::class)->group(function () {
-        Route::get('/user/order/list', 'UserOrderList')->name('user.order.list');
-        Route::get('/user/order/details/{id}', 'UserOrderDetails')->name('user.order.details');
-        Route::get('/user/invoice/download/{id}', 'UserInvoiceDownload')->name('user.invoice.download');
-    });
 });
 
 
@@ -134,6 +136,33 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('/banner/update', 'BannerUpdate')->name('banner.update');
         Route::get('/delete/banner/{id}', 'DeleteBanner')->name('delete.banner');
     });
+
+    Route::controller(ManageOrderController::class)->group(function () {
+        Route::get('/pending/order', 'PendingOrder')->name('pending.order');
+        Route::get('/confirm/order', 'ConfirmOrder')->name('confirm.order');
+        Route::get('/processing/order', 'ProcessingOrder')->name('processing.order');
+        Route::get('/deliverd/order', 'DeliverdOrder')->name('deliverd.order');
+
+        Route::get('/admin/order/details/{id}', 'AdminOrderDetails')->name('admin.order.details');
+    });
+
+    Route::controller(ManageOrderController::class)->group(function () {
+        Route::get('/pening_to_confirm/{id}', 'PendingToConfirm')->name('pening_to_confirm');
+        Route::get('/confirm_to_processing/{id}', 'ConfirmToProcessing')->name('confirm_to_processing');
+        Route::get('/processing_to_deliverd/{id}', 'ProcessingToDiliverd')->name('processing_to_deliverd');
+    });
+    Route::controller(ReviewController::class)->group(function () {
+        Route::get('/admin/pending/review', 'AdminPendingReview')->name('admin.pending.review');
+        Route::get('/admin/approve/review', 'AdminApproveReview')->name('admin.approve.review');
+        Route::get('/reviewchangeStatus', 'ReviewChangeStatus');
+    });
+
+    Route::controller(ReportController::class)->group(function () {
+        Route::get('/admin/all/reports', 'AminAllReports')->name('admin.all.reports');
+        Route::post('/admin/search/bydate', 'AminSearchByDate')->name('admin.search.bydate');
+        Route::post('/admin/search/bymonth', 'AminSearchByMonth')->name('admin.search.bymonth');
+        Route::post('/admin/search/byyear', 'AminSearchByYear')->name('admin.search.byyear');
+    });
 }); // End 
 
 
@@ -165,8 +194,8 @@ Route::middleware(['client', 'status'])->group(function () {
         Route::get('/edit/gallery/{id}', 'EditGallery')->name('edit.gallery');
         Route::post('/update/gallery', 'UpdateGallery')->name('gallery.update');
         Route::get('/delete/gallery/{id}', 'DeleteGallery')->name('delete.gallery');
-        Route::get('/changeStatus', 'ChangeStatus');
     });
+
 
     Route::controller(CuponController::class)->group(function () {
         Route::get('/all/coupon', 'AllCoupon')->name('all.coupon');
@@ -175,6 +204,19 @@ Route::middleware(['client', 'status'])->group(function () {
         Route::get('/edit/coupon/{id}', 'EditCoupon')->name('edit.coupon');
         Route::post('/update/coupon', 'UpdateCoupon')->name('coupon.update');
         Route::get('/delete/coupon/{id}', 'DeleteCoupon')->name('delete.coupon');
+    });
+
+    Route::controller(ManageOrderController::class)->group(function () {
+        Route::get('/all/client/orders', 'AllClientOrders')->name('all.client.orders');
+        Route::get('/client/order/details/{id}', 'ClientOrderDetails')->name('client.order.details');
+    });
+
+
+    Route::controller(ReportController::class)->group(function () {
+        Route::get('/client/all/reports', 'ClientAllReports')->name('client.all.reports');
+        Route::post('/client/search/bydate', 'ClientSearchByDate')->name('client.search.bydate');
+        Route::post('/client/search/bymonth', 'ClientSearchByMonth')->name('client.search.bymonth');
+        Route::post('/client/search/byyear', 'ClientSearchByYear')->name('client.search.byyear');
     });
 });
 
@@ -202,9 +244,7 @@ Route::controller(OrderController::class)->group(function () {
     Route::post('/stripe_order', 'StripeOrder')->name('stripe_order');
 });
 
-// Route::controller(OrderController::class)->group(function () {
-//     Route::post('/cash_order', 'CashOrder')->name('cash_order');
-// });
+
 
 
 // Route::middleware('client')->group(function () {

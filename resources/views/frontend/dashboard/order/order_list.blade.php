@@ -1,6 +1,8 @@
 @extends('frontend.dashboard.dashboard')
 @section('dashboard')
     @php
+        // dd(Auth::user());
+
         $id = Auth::user()->id;
         $profileData = App\Models\User::find($id);
     @endphp

@@ -15,7 +15,6 @@ class OrderController extends Controller
 {
     public function CashOrder(Request $request)
     {
-
         $validateData = $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -44,7 +43,6 @@ class OrderController extends Controller
             'address' => $request->address,
             'payment_type' => 'Cash On Delivery',
             'payment_method' => 'Cash On Delivery',
-
             'currency' => 'USD',
             'amount' => $totalAmount,
             'total_amount' => $tt,
@@ -52,13 +50,12 @@ class OrderController extends Controller
             'order_date' => Carbon::now()->format('d F Y'),
             'order_month' => Carbon::now()->format('F'),
             'order_year' => Carbon::now()->format('Y'),
-
             'status' => 'Pending',
             'created_at' => Carbon::now(),
-
         ]);
 
         $carts = session()->get('cart', []);
+
         foreach ($carts as $cart) {
             OrderItem::insert([
                 'order_id' => $order_id,
@@ -68,10 +65,12 @@ class OrderController extends Controller
                 'price' => $cart['price'],
                 'created_at' => Carbon::now(),
             ]);
-        } // End Foreach
+        }
+
         if (Session::has('coupon')) {
             Session::forget('coupon');
         }
+
         if (Session::has('cart')) {
             Session::forget('cart');
         }

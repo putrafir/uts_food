@@ -5,6 +5,8 @@
         $profileData = App\Models\User::find($id);
     @endphp
 
+
+
     <section class="section pt-4 pb-4 osahan-account-page">
         <div class="container">
             <div class="row">
