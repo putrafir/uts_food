@@ -6,13 +6,14 @@
         <div class="row">
             @foreach ($banner as $item)
                 <div class="col-md-3 col-6">
-
                     <div class="products-box">
                         <a href="{{ $item->url }}"><img alt="" src="{{ asset($item->image) }}"
                                 class="img-fluid rounded"></a>
                     </div>
                 </div>
             @endforeach
+
+
         </div>
     </div>
 </section>

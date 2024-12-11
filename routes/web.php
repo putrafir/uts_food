@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Client\RestaurantController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CuponController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManageController;
+use App\Http\Controllers\ManageOrderController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +41,16 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
     Route::get('/admin/change/password', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
     Route::put('/admin/password/update', [AdminController::class, 'AdminPasswordUpdate'])->name('admin.password.update');
+
+    Route::get('/all/wishlist', [HomeController::class, 'AllWishlist'])->name('all.wishlist');
+    Route::get('/remove/wishlist/{id}', [HomeController::class, 'RemoveWishlist'])->name('remove.wishlist');
+
+
+    Route::controller(ManageOrderController::class)->group(function () {
+        Route::get('/user/order/list', 'UserOrderList')->name('user.order.list');
+        Route::get('/user/order/details/{id}', 'UserOrderDetails')->name('user.order.details');
+        Route::get('/user/invoice/download/{id}', 'UserInvoiceDownload')->name('user.invoice.download');
+    });
 });
 
 
@@ -174,14 +187,20 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/add-wish-list/{id}', 'AddWishList');
 });
 
-// Route::controller(CartController::class)->group(function () {
-//     Route::get('/add_to_cart/{id}', 'AddToCart')->name('add_to_cart');
-//     Route::post('/cart/update-quantity', 'updateCartQuanity')->name('cart.updateQuantity');
-//     Route::post('/cart/remove', 'CartRemove')->name('cart.remove');
-//     Route::post('/apply-coupon', 'ApplyCoupon');
-//     Route::get('/remove-coupon', 'CouponRemove');
-//     Route::get('/checkout', 'ShopCheckout')->name('checkout');
-// });
+Route::controller(CartController::class)->group(function () {
+    Route::get('/add_to_cart/{id}', 'AddToCart')->name('add_to_cart');
+    Route::post('/cart/update-quantity', 'updateCartQuanity')->name('cart.updateQuantity');
+    Route::post('/cart/remove', 'CartRemove')->name('cart.remove');
+    Route::post('/apply-coupon', 'ApplyCoupon');
+    Route::get('/remove-coupon', 'CouponRemove');
+    Route::get('/checkout', 'ShopCheckout')->name('checkout');
+});
+
+
+Route::controller(OrderController::class)->group(function () {
+    Route::post('/cash_order', 'CashOrder')->name('cash_order');
+    Route::post('/stripe_order', 'StripeOrder')->name('stripe_order');
+});
 
 // Route::controller(OrderController::class)->group(function () {
 //     Route::post('/cash_order', 'CashOrder')->name('cash_order');
