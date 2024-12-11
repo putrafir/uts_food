@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Client\RestaurantController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CuponController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UserController::class, 'Index'])->name('index');
 
 Route::get('/dashboard', function () {
-    return view('frontend.dashboard.dashboard');
+    return view('frontend.dashboard.profile');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -166,6 +167,26 @@ Route::middleware(['client', 'status'])->group(function () {
 
 
 Route::get('/changeStatus', [RestaurantController::class, 'ChangeStatus']);
+
+
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/restaurant/details/{id}', 'RestaurantDetails')->name('res.details');
+    Route::get('/add-wish-list/{id}', 'AddWishList');
+});
+
+// Route::controller(CartController::class)->group(function () {
+//     Route::get('/add_to_cart/{id}', 'AddToCart')->name('add_to_cart');
+//     Route::post('/cart/update-quantity', 'updateCartQuanity')->name('cart.updateQuantity');
+//     Route::post('/cart/remove', 'CartRemove')->name('cart.remove');
+//     Route::post('/apply-coupon', 'ApplyCoupon');
+//     Route::get('/remove-coupon', 'CouponRemove');
+//     Route::get('/checkout', 'ShopCheckout')->name('checkout');
+// });
+
+// Route::controller(OrderController::class)->group(function () {
+//     Route::post('/cash_order', 'CashOrder')->name('cash_order');
+// });
+
 
 // Route::middleware('client')->group(function () {
 //     Route::get('/client/dashboard', [ClientController::class, 'ClientDashboard'])->name('client.dashboard');
