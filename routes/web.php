@@ -245,6 +245,12 @@ Route::controller(OrderController::class)->group(function () {
 });
 
 
+Route::controller(ReviewController::class)->group(function () {
+    Route::post('/store/review', 'StoreReview')->name('store.review');
+});
+
+
+
 
 
 // Route::middleware('client')->group(function () {
